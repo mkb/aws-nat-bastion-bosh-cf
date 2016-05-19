@@ -44,7 +44,8 @@ resource_pools:
   cloud_properties:
     availability_zone: ${cf-subnet2-az}
     instance_type: m3.medium
-    ephemeral_disk: {size: 8_000, type: gp2}
+    ephemeral_disk: {size: 40_000, type: gp2}
+    root_disk: {size: 40_000, type: gp2}
 - name: burst_z1
   network: cf_private
   stemcell:
@@ -53,7 +54,8 @@ resource_pools:
   cloud_properties:
     availability_zone: ${cf-subnet2-az}
     instance_type: t2.medium
-    ephemeral_disk: {size: 8_000, type: gp2}
+    ephemeral_disk: {size: 40_000, type: gp2}
+    root_disk: {size: 40_000, type: gp2}
 
 compilation:
   workers: 2
@@ -62,6 +64,7 @@ compilation:
   cloud_properties:
     availability_zone: ${cf-subnet2-az}
     instance_type: m3.medium
+    root_disk: {size: 40_000, type: gp2}
 
 update:
   canaries: 2
@@ -1004,4 +1007,3 @@ properties:
     ssl:
       port: -1
     url: https://uaa.${cf-domain}
-

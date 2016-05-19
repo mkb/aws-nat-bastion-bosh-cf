@@ -21,12 +21,13 @@ resource_pools:
   cloud_properties:
     instance_type: ${bosh-director_vm_size}
     ephemeral_disk: {size: 40_000, type: gp2}
+    root_disk: {size: 40_000, type: gp2}
     availability_zone: ${bosh-az}
 
 disk_pools:
 - name: disks
   disk_size: 40_000
-  cloud_properties: {type: gp2}
+  cloud_properties: {type: gp2, size: 40_000}
 
 networks:
 - name: private
@@ -50,7 +51,7 @@ jobs:
   - {name: health_monitor, release: bosh}
   - {name: registry, release: bosh}
   - {name: aws_cpi, release: bosh-aws-cpi}
-    
+
   resource_pool: vms
   persistent_disk_pool: disks
 
@@ -138,4 +139,3 @@ cloud_provider:
     agent: {mbus: "https://mbus:mbu5pa55@0.0.0.0:6868"}
     blobstore: {provider: local, path: /var/vcap/micro_bosh/data/cache}
     ntp: *ntp
-
